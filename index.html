@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: rgb(255, 252, 252);
+        }
+
+        h1 {
+            display: flex;
+            align-items: center;
+            margin: 0;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-weight: 600;
+            font-size: larger; 
+        } h1 span {
+            margin-left: -5pt;
+        }
+
+        img {
+            height: 4rem;
+            margin: 0;
+        }
+
+        header {
+            background-color: white;
+            border-bottom: 1.5px solid rgb(224, 221, 221);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 15pt;
+        }
+
+        a {
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            font-weight: 600;
+            font-size: medium;
+            text-decoration: none;
+            padding: 6pt 20pt;
+            border-radius: 50rem;
+            border: 1pt solid rgb(196, 180, 180);
+            color: rgba(133, 1, 1, 0.673);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1><img src="./marketRangers_logo.png" alt=""><span>MarketRangers</span></h1>
+        <a href="">Sign up</a>
+    </header>
+
+    <script>
+        function downloadImage(imageUrl, filename) {
+            fetch(imageUrl)
+                .then(response => { console.log(response.blob()); response.blob(); })
+                .then(blob => {
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.style.display = 'none';
+                    a.href = url;
+                    a.download = filename || 'downloaded_image.jpg'; // Set default filename or use provided one
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url); // Clean up the URL object
+                    a.remove();
+                })
+                .catch(error => console.error('Error downloading image:', error));
+        }
+
+        // Example usage:
+        const imageUrl = 'https://example.com/path/to/your/image.jpg'; // Replace with your image URL
+        const desiredFilename = 'my_awesome_image.jpg';
+
+        // You can call this function on a button click or other event
+        document.getElementById('downloadButton').addEventListener('click', () => {
+            downloadImage("https://assets-global.website-files.com/64f5736e06…rket_rangers_green_new-removebg-preview-p-500.png", "marketRangers_logo");
+        });
+    </script>
+</body>
+
+</html>
